@@ -31,7 +31,7 @@ let game = () => {
     let playerScore, computerScore;
     playerScore = computerScore = 0;
     for (let i = 0; i < 5; i++) {
-       const res = playRound(playerPlay(), computerPlay);
+       const res = playRound(playerPlay(), computerPlay());
        if (res === 0) {
            console.log("PC wins")
            computerScore++;
@@ -54,4 +54,4 @@ let game = () => {
     }
 }
 
-// game();
+game();
