@@ -54,4 +54,4 @@ let game = () => {
     }
 }
 
-game();
+// game();
