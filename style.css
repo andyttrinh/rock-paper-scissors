@@ -3,6 +3,11 @@ html {
     width: 100%;
 }
 
+.winner {
+    font-size: 100px;
+    text-align: center;
+}
+
 body {
     height: 100%;
     display: flex;

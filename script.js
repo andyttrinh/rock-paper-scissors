@@ -1,3 +1,6 @@
+
+
+
 const choices = ['rock', 'paper', 'scissors'];
 
 let computerPlay = () => choices[Math.floor(Math.random() * (3 - 0) + 0)];
@@ -10,20 +13,31 @@ let playerPlay = () => {
 
 
 let playRound = (playerSelection, computerSelection) => {
-    const choices = [playerSelection, computerSelection];
+    const choices = [playerSelection, computerSelection()];
+    const playerScore = document.querySelector("#player-score");
+    const computerScore = document.querySelector("#computer-score");
     if (playerSelection === computerSelection) {
-        return null;
+        playerScore.textContent = parseInt(playerScore.textContent) + 1;
+        computerScore.textContent = parseInt(computerScore.textContent) + 1;
     }
     else if (choices.includes('rock') && choices.includes('paper')) {
-        if (playerSelection === 'paper') return 1;
-        else return 0;
+        if (playerSelection === 'paper') playerScore.textContent = parseInt(playerScore.textContent) + 1;
+        else computerScore.textContent = parseInt(computerScore.textContent) + 1;
     }
     else if (choices.includes('rock') && choices.includes('scissors')) {
-        if (playerSelection === 'rock') return 1;
-        else return 0;
+        if (playerSelection === 'rock') playerScore.textContent = parseInt(playerScore.textContent) + 1;
+        else computerScore.textContent = parseInt(computerScore.textContent) + 1;
     } else {
-        if (playerSelection === 'scissors') return 1;
-        else return 0;
+        if (playerSelection === 'scissors') playerScore.textContent = parseInt(playerScore.textContent) + 1;
+        else computerScore.textContent = parseInt(computerScore.textContent) + 1;
+    }
+
+    if (playerScore.textContent === '5' || computerScore.textContent === '5') {
+        const winner = document.createElement('h1');
+        winner.textContent = playerScore.textContent === '5' ? 'Player Wins!' : 'Computer Wins!';
+        winner.classList.add('winner');
+        document.body.prepend(winner);
+        buttons.forEach(button => button.removeEventListener('click', runPlay))
     }
 }
 
@@ -54,4 +68,16 @@ let game = () => {
     }
 }
 
-game();
+// Events
+const buttons = document.querySelectorAll("button");
+// function clicked(e) {
+//     console.log(this.id);
+// }
+function runPlay (e) {
+    playRound(this.id, computerPlay);
+}
+buttons.forEach(button => button.addEventListener("click", runPlay));
+
+
+
+// game();
